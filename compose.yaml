@@ -1,0 +1,35 @@
+services:
+  yaya:
+    build: .
+    image: yaya-ops:latest
+    container_name: yaya-ops
+    restart: unless-stopped
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8080}:8080"
+    environment:
+      TZ: ${TZ:-Asia/Shanghai}
+      APP_API_TOKEN: ${APP_API_TOKEN:-}
+      MAX_WORKERS: ${MAX_WORKERS:-4}
+    volumes:
+      - yaya-data:/data
+
+  mcp:
+    build: .
+    image: yaya-ops:latest
+    container_name: yaya-ops-mcp
+    restart: unless-stopped
+    command: ["python", "-m", "app.mcp_server"]
+    ports:
+      - "${MCP_BIND_ADDRESS:-127.0.0.1}:${MCP_PORT:-8081}:8081"
+    environment:
+      YAYA_API_URL: http://yaya:8080
+      APP_API_TOKEN: ${APP_API_TOKEN:-}
+      MCP_API_TOKEN: ${MCP_API_TOKEN:-}
+      MCP_BIND_ADDRESS: ${MCP_BIND_ADDRESS:-127.0.0.1}
+      MCP_PORT: 8081
+    depends_on:
+      yaya:
+        condition: service_healthy
+
+volumes:
+  yaya-data:

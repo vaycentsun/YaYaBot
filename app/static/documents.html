@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>文档中心 · YaYa bot</title>
+  <link rel="stylesheet" href="/style.css?v=20261116-1">
+  <link rel="stylesheet" href="/documents.css?v=20261116-1">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand brand-link" href="/"><span class="brand-mark">Y</span><div><strong>YaYa bot</strong><span>你的定时任务小帮手</span></div></a>
+    <div class="header-actions"><a class="button button-secondary" href="/">返回任务</a></div>
+  </header>
+
+  <main class="docs-container">
+    <section class="docs-hero">
+      <p class="eyebrow">YAYA KNOWLEDGE BASE</p>
+      <h1>需要帮忙？来翻翻文档。</h1>
+      <p>使用指南、AI 接入方法和安全说明，都替你放在这里了。</p>
+    </section>
+
+    <div class="docs-layout">
+      <aside class="panel docs-sidebar">
+        <div class="docs-sidebar-heading"><h2>全部文档</h2><span id="document-count" class="count-badge">0 篇</span></div>
+        <nav id="document-list" class="document-list" aria-label="文档列表"></nav>
+        <div id="document-list-empty" class="docs-empty" hidden>文档还在准备中，稍后再来看看。</div>
+      </aside>
+
+      <article class="panel docs-reader">
+        <div id="document-content" class="markdown-body"><div class="docs-loading">正在打开文档…</div></div>
+      </article>
+    </div>
+    <footer><span>YaYa bot · 文档中心</span><span>新增 Markdown 文档会自动出现在这里</span></footer>
+  </main>
+  <script src="/documents.js?v=20261116-1"></script>
+</body>
+</html>
