@@ -1,5 +1,7 @@
 # YaYa bot
 
+[简体中文](README.md) | [English](README.en.md)
+
 YaYa bot 是你的定时任务小帮手。把 Shell 或 Python 脚本交给它，挑一个时间，它就会准时开跑，并帮你收好每次执行记录。你还可以用它定时发送网络唤醒信号，或者接入 AI，让 AI 帮你安排任务。
 
 通过 Docker Compose 部署，Linux、macOS 和 Windows（Docker Desktop）都能使用相同的安装方式。
