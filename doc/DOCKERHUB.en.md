@@ -4,9 +4,9 @@ You can run YaYa Bot without building from source by pulling its Docker Hub imag
 
 ## Image Details
 
-- Repository: <https://hub.docker.com/r/vaycentsun/yayabot>
-- Latest image: `vaycentsun/yayabot:latest`
-- Versioned image: `vaycentsun/yayabot:1.0.0`
+- Repository: <https://hub.docker.com/r/vaycent/yayabot>
+- Latest image: `vaycent/yayabot:latest`
+- Versioned image: `vaycent/yayabot:1.0.0`
 - Platforms: `linux/amd64` and `linux/arm64`
 - Data directory: `/data`, which must be mounted as a persistent volume
 
@@ -52,13 +52,13 @@ The same commands work in Windows PowerShell. If `curl` is unavailable, download
 If you do not need MCP, run a single container:
 
 ```bash
-docker pull vaycentsun/yayabot:latest
+docker pull vaycent/yayabot:latest
 docker run -d \
   --name yayabot \
   --restart unless-stopped \
   -p 127.0.0.1:8080:8080 \
   -v yaya-data:/data \
-  vaycentsun/yayabot:latest
+  vaycent/yayabot:latest
 ```
 
 In Windows PowerShell, put the command on one line or use the PowerShell backtick for line continuation.

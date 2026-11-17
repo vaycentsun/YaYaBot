@@ -1,6 +1,6 @@
 services:
   yaya:
-    image: ${YAYA_IMAGE:-vaycentsun/yayabot:latest}
+    image: ${YAYA_IMAGE:-vaycent/yayabot:latest}
     container_name: yaya-ops
     restart: unless-stopped
     ports:
@@ -13,7 +13,7 @@ services:
       - yaya-data:/data
 
   mcp:
-    image: ${YAYA_IMAGE:-vaycentsun/yayabot:latest}
+    image: ${YAYA_IMAGE:-vaycent/yayabot:latest}
     container_name: yaya-ops-mcp
     restart: unless-stopped
     command: ["python", "-m", "app.mcp_server"]

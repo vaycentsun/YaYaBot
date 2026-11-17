@@ -4,9 +4,9 @@
 
 ## 镜像信息
 
-- 仓库：<https://hub.docker.com/r/vaycentsun/yayabot>
-- 最新镜像：`vaycentsun/yayabot:latest`
-- 版本镜像：`vaycentsun/yayabot:1.0.0`
+- 仓库：<https://hub.docker.com/r/vaycent/yayabot>
+- 最新镜像：`vaycent/yayabot:latest`
+- 版本镜像：`vaycent/yayabot:1.0.0`
 - 平台：`linux/amd64`、`linux/arm64`
 - 数据目录：`/data`，必须挂载持久化数据卷
 
@@ -52,13 +52,13 @@ Windows PowerShell 也可以使用相同命令；如果没有 `curl`，可用浏
 不需要 MCP 时，可以直接运行一个容器：
 
 ```bash
-docker pull vaycentsun/yayabot:latest
+docker pull vaycent/yayabot:latest
 docker run -d \
   --name yayabot \
   --restart unless-stopped \
   -p 127.0.0.1:8080:8080 \
   -v yaya-data:/data \
-  vaycentsun/yayabot:latest
+  vaycent/yayabot:latest
 ```
 
 Windows PowerShell 可以把多行命令写成一行，或使用 PowerShell 的反引号续行符。

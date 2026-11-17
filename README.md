@@ -23,7 +23,7 @@ YaYa bot 是你的定时任务小帮手。把 Shell 或 Python 脚本交给它�
 
 ### 方式一：使用 Docker Hub 镜像（推荐）
 
-镜像地址：<https://hub.docker.com/r/vaycentsun/yayabot>，支持 `linux/amd64` 和 `linux/arm64`。安装 Docker 及 Compose 插件后运行：
+镜像地址：<https://hub.docker.com/r/vaycent/yayabot>，支持 `linux/amd64` 和 `linux/arm64`。安装 Docker 及 Compose 插件后运行：
 
 ```bash
 mkdir yayabot

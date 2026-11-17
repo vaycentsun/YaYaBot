@@ -23,7 +23,7 @@ Deploy it with Docker Compose for the same installation experience on Linux, mac
 
 ### Option 1: Use Docker Hub (Recommended)
 
-Image: <https://hub.docker.com/r/vaycentsun/yayabot>, available for `linux/amd64` and `linux/arm64`. After installing Docker and the Compose plugin, run:
+Image: <https://hub.docker.com/r/vaycent/yayabot>, available for `linux/amd64` and `linux/arm64`. After installing Docker and the Compose plugin, run:
 
 ```bash
 mkdir yayabot
