@@ -17,16 +17,31 @@ Deploy it with Docker Compose for the same installation experience on Linux, mac
 - SQLite persistence with automatic schedule recovery after restarts
 - MCP server that lets external LLMs create tasks, run them immediately, and query logs
 - Optional access tokens, with local-only listening by default
+- Instant Chinese/English interface switching with a saved language preference
 
 ## Quick Start
 
-After installing Docker and the Compose plugin, run this command in the project directory:
+### Option 1: Use Docker Hub (Recommended)
+
+Image: <https://hub.docker.com/r/vaycentsun/yayabot>, available for `linux/amd64` and `linux/arm64`. After installing Docker and the Compose plugin, run:
+
+```bash
+mkdir yayabot
+cd yayabot
+curl -o compose.yaml https://raw.githubusercontent.com/vaycentsun/YaYaBot/main/compose.hub.yaml
+docker compose pull
+docker compose up -d
+```
+
+### Option 2: Build from Source
+
+Clone the project, then run this command in the project directory:
 
 ```bash
 docker compose up -d --build
 ```
 
-Open <http://localhost:8080>. The MCP endpoint is `http://localhost:8081/mcp`; see [doc/MCP.md](doc/MCP.md) for client configuration and tool details (Chinese).
+Both options start the web interface and MCP. Open <http://localhost:8080>. The MCP endpoint is `http://localhost:8081/mcp`; see [doc/MCP.md](doc/MCP.md) for client configuration and tool details (Chinese).
 
 ```bash
 # Check service status
@@ -43,8 +58,14 @@ Tasks and logs are stored in the `yaya-data` Docker volume. `docker compose down
 
 ### Enable Access Tokens
 
+Copy the example when building from source, or download it for a Docker Hub deployment:
+
 ```bash
+# Source deployment
 cp .env.example .env
+
+# Docker Hub deployment
+curl -o .env https://raw.githubusercontent.com/vaycentsun/YaYaBot/main/.env.example
 ```
 
 Edit `.env`, replace `APP_API_TOKEN` with a sufficiently long random string, and start the services. The web interface will ask for the token once; it is stored only in the session storage of the current browser tab.
@@ -55,10 +76,11 @@ The default `BIND_ADDRESS=127.0.0.1` allows access only from the deployment mach
 
 | Document | Further reading |
 | --- | --- |
+| [Docker Hub Guide](doc/DOCKERHUB.en.md) | Image pulls, Compose startup, configuration, upgrades, and multi-platform publishing |
 | [MCP Server Guide](doc/MCP.md) (Chinese) | MCP tools, client configuration, usage examples, remote access, and security |
 | [Host Directory Mount Guide](doc/MOUNTS.md) (Chinese) | Mount details, host directory mappings, read/write permissions, and script examples |
 
-Additional topic guides live in `doc/` and are linked here. The “文档” button at the top of the web interface opens the documentation center, where new Markdown files in `doc/` automatically appear in the reading list.
+Additional topic guides live in `doc/` and are linked here. The “Docs” button at the top of the web interface opens the documentation center, where new Markdown files in `doc/` automatically appear in the reading list.
 
 ## Creating Tasks
 

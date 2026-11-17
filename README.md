@@ -17,16 +17,31 @@ YaYa bot 是你的定时任务小帮手。把 Shell 或 Python 脚本交给它�
 - SQLite 持久化，重启后自动恢复调度
 - MCP Server，外部 LLM 可创建任务、立即执行并查询日志
 - 可选访问令牌，默认只监听本机
+- 中英文界面随时切换，自动记住语言偏好
 
 ## 快速启动
 
-安装 Docker 及 Compose 插件后，在项目目录运行：
+### 方式一：使用 Docker Hub 镜像（推荐）
+
+镜像地址：<https://hub.docker.com/r/vaycentsun/yayabot>，支持 `linux/amd64` 和 `linux/arm64`。安装 Docker 及 Compose 插件后运行：
+
+```bash
+mkdir yayabot
+cd yayabot
+curl -o compose.yaml https://raw.githubusercontent.com/vaycentsun/YaYaBot/main/compose.hub.yaml
+docker compose pull
+docker compose up -d
+```
+
+### 方式二：从源码构建
+
+克隆项目后，在项目目录运行：
 
 ```bash
 docker compose up -d --build
 ```
 
-打开 <http://localhost:8080>。MCP 地址为 `http://localhost:8081/mcp`，客户端配置和工具说明见 [doc/MCP.md](doc/MCP.md)。
+两种方式都会启动网页和 MCP。打开 <http://localhost:8080>，MCP 地址为 `http://localhost:8081/mcp`，客户端配置和工具说明见 [doc/MCP.md](doc/MCP.md)。
 
 ```bash
 # 查看运行状态
@@ -43,8 +58,14 @@ docker compose down
 
 ### 启用访问令牌
 
+源码部署可复制示例配置；Docker Hub 部署可直接下载：
+
 ```bash
+# 源码部署
 cp .env.example .env
+
+# Docker Hub 部署
+curl -o .env https://raw.githubusercontent.com/vaycentsun/YaYaBot/main/.env.example
 ```
 
 编辑 `.env`，把 `APP_API_TOKEN` 改为足够长的随机字符串，再启动服务。网页会要求输入一次令牌；令牌仅保存在当前浏览器标签页的会话存储中。
@@ -55,6 +76,7 @@ cp .env.example .env
 
 | 文档 | 进一步阅读 |
 | --- | --- |
+| [Docker Hub 使用指南](doc/DOCKERHUB.md) | 镜像拉取、Compose 启动、配置、升级与多平台发布 |
 | [MCP 服务指南](doc/MCP.md) | MCP 工具、客户端配置、调用示例、远程访问与安全说明 |
 | [宿主机目录挂载指南](doc/MOUNTS.md) | 查看挂载信息、映射宿主机目录、读写权限与脚本示例 |
 

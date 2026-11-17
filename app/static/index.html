@@ -5,110 +5,112 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <title>YaYa bot · 定时任务小帮手</title>
-  <link rel="stylesheet" href="/style.css?v=20261116-1">
+  <link rel="stylesheet" href="/style.css?v=20261117-1">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="brand-mark">Y</span><div><strong>YaYa bot</strong><span>你的定时任务小帮手</span></div></div>
+    <div class="brand"><span class="brand-mark">Y</span><div><strong>YaYa bot</strong><span data-i18n="brand.tagline">你的定时任务小帮手</span></div></div>
     <div class="header-actions">
-      <span id="service-status" class="service-status"><i></i>服务正常</span>
-      <a class="button button-secondary" href="/documents.html">文档</a>
-      <button id="refresh-button" class="button button-secondary">刷新</button>
-      <button id="new-task-button" class="button button-primary">新建任务</button>
+      <span id="service-status" class="service-status"><i></i><span data-i18n="service.online">服务正常</span></span>
+      <select id="language-switcher" class="language-switcher" data-i18n-aria-label="language.label" aria-label="界面语言"><option value="zh">简体中文</option><option value="en">English</option></select>
+      <a class="button button-secondary" href="/documents.html" data-i18n="nav.documents">文档</a>
+      <button id="refresh-button" class="button button-secondary" data-i18n="nav.refresh">刷新</button>
+      <button id="new-task-button" class="button button-primary" data-i18n="nav.newTask">新建任务</button>
     </div>
   </header>
 
   <main class="container">
     <section class="hero">
-      <div><p class="eyebrow">YOUR LITTLE AUTOMATION HELPER</p><h1>重复的小事，交给 YaYa 准点搞定。</h1><p>写好脚本，挑个时间，YaYa 就会准时帮你跑；想看看结果，执行记录也都在。</p></div>
-      <div class="hero-note"><strong>点几下，就定时</strong><span>选频率、时间和时区</span><code>不用学 Cron，也能轻松搞定</code></div>
+      <div><p class="eyebrow">YOUR LITTLE AUTOMATION HELPER</p><h1 data-i18n="hero.title">重复的小事，交给 YaYa 准点搞定。</h1><p data-i18n="hero.description">写好脚本，挑个时间，YaYa 就会准时帮你跑；想看看结果，执行记录也都在。</p></div>
+      <div class="hero-note"><strong data-i18n="hero.noteTitle">点几下，就定时</strong><span data-i18n="hero.noteSchedule">选频率、时间和时区</span><code data-i18n="hero.noteCron">不用学 Cron，也能轻松搞定</code></div>
     </section>
 
-    <section class="stats" aria-label="任务概览">
-      <article><span>全部任务</span><strong id="stat-total">0</strong><small>持久化保存</small></article>
-      <article><span>已启用</span><strong id="stat-enabled">0</strong><small>等待调度</small></article>
-      <article><span>今日执行</span><strong id="stat-runs">0</strong><small>自动与手动</small></article>
-      <article><span>今日成功率</span><strong id="stat-success">—</strong><small>已结束的执行</small></article>
+    <section class="stats" data-i18n-aria-label="stats.aria" aria-label="任务概览">
+      <article><span data-i18n="stats.total">全部任务</span><strong id="stat-total">0</strong><small data-i18n="stats.totalHint">持久化保存</small></article>
+      <article><span data-i18n="stats.enabled">已启用</span><strong id="stat-enabled">0</strong><small data-i18n="stats.enabledHint">等待调度</small></article>
+      <article><span data-i18n="stats.runs">今日执行</span><strong id="stat-runs">0</strong><small data-i18n="stats.runsHint">自动与手动</small></article>
+      <article><span data-i18n="stats.success">今日成功率</span><strong id="stat-success">—</strong><small data-i18n="stats.successHint">已结束的执行</small></article>
     </section>
 
     <section class="panel mount-panel">
-      <div class="panel-heading"><div><h2>挂载目录</h2><p>在任务中使用容器路径，就能操作已挂载的宿主机文件</p></div><a class="text-button" href="/documents.html?doc=MOUNTS.md">怎么挂载？</a></div>
-      <div id="mount-list" class="mount-list"><div class="mount-empty">正在读取挂载信息…</div></div>
+      <div class="panel-heading"><div><h2 data-i18n="mounts.title">挂载目录</h2><p data-i18n="mounts.subtitle">在任务中使用容器路径，就能操作已挂载的宿主机文件</p></div><a class="text-button" href="/documents.html?doc=MOUNTS.md" data-i18n="mounts.guide">怎么挂载？</a></div>
+      <div id="mount-list" class="mount-list"><div class="mount-empty" data-i18n="mounts.loading">正在读取挂载信息…</div></div>
     </section>
 
     <section class="panel">
-      <div class="panel-heading"><div><h2>定时任务</h2><p>脚本会在独立的 Docker 容器里运行</p></div><span id="task-count" class="count-badge">0 项</span></div>
+      <div class="panel-heading"><div><h2 data-i18n="tasks.title">定时任务</h2><p data-i18n="tasks.subtitle">脚本会在独立的 Docker 容器里运行</p></div><span id="task-count" class="count-badge">0 项</span></div>
       <div class="table-wrap">
         <table>
-          <thead><tr><th>任务</th><th>执行计划</th><th>下次执行</th><th>状态</th><th class="actions-column">操作</th></tr></thead>
+          <thead><tr><th data-i18n="tasks.tableTask">任务</th><th data-i18n="tasks.tableSchedule">执行计划</th><th data-i18n="tasks.tableNext">下次执行</th><th data-i18n="tasks.tableStatus">状态</th><th class="actions-column" data-i18n="tasks.tableActions">操作</th></tr></thead>
           <tbody id="task-list"></tbody>
         </table>
-        <div id="task-empty" class="empty-state"><div class="empty-icon">＋</div><h3>给 YaYa 安排第一件事吧</h3><p>上传或写下脚本，再挑个执行时间，就搞定啦。</p><button class="button button-primary" data-action="new">创建任务</button></div>
+        <div id="task-empty" class="empty-state"><div class="empty-icon">＋</div><h3 data-i18n="tasks.emptyTitle">给 YaYa 安排第一件事吧</h3><p data-i18n="tasks.emptyDescription">上传或写下脚本，再挑个执行时间，就搞定啦。</p><button class="button button-primary" data-action="new" data-i18n="tasks.create">创建任务</button></div>
       </div>
     </section>
 
     <section class="panel history-panel">
-      <div class="panel-heading"><div><h2>执行记录</h2><p>每次运行都记在这里，点一条就能看详细日志</p></div><select id="history-filter" aria-label="筛选执行记录"><option value="">全部任务</option></select></div>
+      <div class="panel-heading"><div><h2 data-i18n="history.title">执行记录</h2><p data-i18n="history.subtitle">每次运行都记在这里，点一条就能看详细日志</p></div><select id="history-filter" data-i18n-aria-label="history.filter" aria-label="筛选执行记录"><option value="" data-i18n="history.filterAll">全部任务</option></select></div>
       <div id="run-list" class="run-list"></div>
-      <div id="run-empty" class="empty-state compact"><h3>还没有执行记录</h3><p>想先看看效果？点任务右侧的“运行”试一下。</p></div>
+      <div id="run-empty" class="empty-state compact"><h3 data-i18n="history.emptyTitle">还没有执行记录</h3><p data-i18n="history.emptyDescription">想先看看效果？点任务右侧的“运行”试一下。</p></div>
     </section>
 
-    <footer><span>YaYa bot · 任务和记录都替你收好了</span><span>网络唤醒显示成功，表示叫醒信号已发出</span></footer>
+    <footer><span data-i18n="footer.main">YaYa bot · 任务和记录都替你收好了</span><span data-i18n="footer.wol">网络唤醒显示成功，表示叫醒信号已发出</span></footer>
   </main>
 
   <dialog id="task-dialog" class="dialog task-dialog">
     <form id="task-form">
-      <div class="dialog-header"><div><p class="eyebrow">TASK CONFIGURATION</p><h2 id="dialog-title">新建任务</h2></div><button type="button" class="icon-button" data-close="task-dialog" aria-label="关闭">×</button></div>
+      <div class="dialog-header"><div><p class="eyebrow">TASK CONFIGURATION</p><h2 id="dialog-title" data-i18n="task.new">新建任务</h2></div><button type="button" class="icon-button" data-close="task-dialog" data-i18n-aria-label="common.close" aria-label="关闭">×</button></div>
       <input type="hidden" id="task-id">
       <div class="form-grid">
-        <label class="field full"><span>任务名称</span><input id="task-name" required maxlength="100" placeholder="例如：每日清理临时文件"></label>
-        <label class="field"><span>任务类型</span><select id="task-type"><option value="shell">Shell 脚本</option><option value="python">Python 脚本</option><option value="wol">网络唤醒（WoL）</option></select></label>
-        <label class="field"><span>超时时间（秒）</span><input id="task-timeout" type="number" min="1" max="86400" value="300" required></label>
+        <label class="field full"><span data-i18n="form.name">任务名称</span><input id="task-name" required maxlength="100" data-i18n-placeholder="form.namePlaceholder" placeholder="例如：每日清理临时文件"></label>
+        <label class="field"><span data-i18n="form.type">任务类型</span><select id="task-type"><option value="shell" data-i18n="form.shell">Shell 脚本</option><option value="python" data-i18n="form.python">Python 脚本</option><option value="wol" data-i18n="form.wol">网络唤醒（WoL）</option></select></label>
+        <label class="field"><span data-i18n="form.timeout">超时时间（秒）</span><input id="task-timeout" type="number" min="1" max="86400" value="300" required></label>
 
         <div class="schedule-box full">
-          <div class="section-title"><strong>执行计划</strong><small>按所选时区的本地时间触发</small></div>
+          <div class="section-title"><strong data-i18n="form.schedule">执行计划</strong><small data-i18n="form.scheduleHint">按所选时区的本地时间触发</small></div>
           <div class="form-grid">
-            <label class="field"><span>重复频率</span><select id="schedule-frequency"><option value="daily">每天</option><option value="weekly">每周</option><option value="monthly">每月</option><option value="hourly">每小时</option><option value="minutes">每隔几分钟</option><option id="custom-schedule-option" value="custom" hidden>保留现有高级规则</option></select></label>
-            <label id="schedule-time-field" class="field"><span>执行时间</span><input id="schedule-time" type="time" value="09:00" required></label>
-            <label id="schedule-hourly-field" class="field" hidden><span>每小时的第几分钟</span><input id="schedule-minute" type="number" min="0" max="59" value="0"></label>
-            <label id="schedule-interval-field" class="field" hidden><span>间隔分钟数</span><input id="schedule-interval" type="number" min="1" max="59" value="10"></label>
-            <label id="schedule-monthly-field" class="field" hidden><span>每月第几天</span><input id="schedule-month-day" type="number" min="1" max="31" value="1"><small>日期不存在的月份会自动跳过</small></label>
-            <fieldset id="schedule-weekly-field" class="weekday-field full" hidden><legend>选择星期</legend><div class="weekday-options"><label><input type="checkbox" value="1">周一</label><label><input type="checkbox" value="2">周二</label><label><input type="checkbox" value="3">周三</label><label><input type="checkbox" value="4">周四</label><label><input type="checkbox" value="5">周五</label><label><input type="checkbox" value="6">周六</label><label><input type="checkbox" value="0">周日</label></div></fieldset>
-            <label class="field full"><span>时区</span><input id="task-timezone" list="timezone-list" required value="Asia/Shanghai"><datalist id="timezone-list"><option>Asia/Shanghai</option><option>Asia/Tokyo</option><option>Europe/London</option><option>Europe/Berlin</option><option>America/New_York</option><option>America/Los_Angeles</option><option>UTC</option></datalist><small>可输入其他地区，例如 Europe/Paris</small></label>
-            <p id="custom-schedule-note" class="form-hint full" hidden>此任务使用高级调度规则。选择其他重复频率即可改为可视化设置；不做修改时会保留原规则。</p>
+            <label class="field"><span data-i18n="form.frequency">重复频率</span><select id="schedule-frequency"><option value="daily" data-i18n="form.daily">每天</option><option value="weekly" data-i18n="form.weekly">每周</option><option value="monthly" data-i18n="form.monthly">每月</option><option value="hourly" data-i18n="form.hourly">每小时</option><option value="minutes" data-i18n="form.minutes">每隔几分钟</option><option id="custom-schedule-option" value="custom" data-i18n="form.custom" hidden>保留现有高级规则</option></select></label>
+            <label id="schedule-time-field" class="field"><span data-i18n="form.time">执行时间</span><input id="schedule-time" type="time" value="09:00" required></label>
+            <label id="schedule-hourly-field" class="field" hidden><span data-i18n="form.hourlyMinute">每小时的第几分钟</span><input id="schedule-minute" type="number" min="0" max="59" value="0"></label>
+            <label id="schedule-interval-field" class="field" hidden><span data-i18n="form.interval">间隔分钟数</span><input id="schedule-interval" type="number" min="1" max="59" value="10"></label>
+            <label id="schedule-monthly-field" class="field" hidden><span data-i18n="form.monthDay">每月第几天</span><input id="schedule-month-day" type="number" min="1" max="31" value="1"><small data-i18n="form.monthDayHint">日期不存在的月份会自动跳过</small></label>
+            <fieldset id="schedule-weekly-field" class="weekday-field full" hidden><legend data-i18n="form.weekdays">选择星期</legend><div class="weekday-options"><label><input type="checkbox" value="1"><span data-i18n="weekday.1">周一</span></label><label><input type="checkbox" value="2"><span data-i18n="weekday.2">周二</span></label><label><input type="checkbox" value="3"><span data-i18n="weekday.3">周三</span></label><label><input type="checkbox" value="4"><span data-i18n="weekday.4">周四</span></label><label><input type="checkbox" value="5"><span data-i18n="weekday.5">周五</span></label><label><input type="checkbox" value="6"><span data-i18n="weekday.6">周六</span></label><label><input type="checkbox" value="0"><span data-i18n="weekday.0">周日</span></label></div></fieldset>
+            <label class="field full"><span data-i18n="form.timezone">时区</span><input id="task-timezone" list="timezone-list" required value="Asia/Shanghai"><datalist id="timezone-list"><option>Asia/Shanghai</option><option>Asia/Tokyo</option><option>Europe/London</option><option>Europe/Berlin</option><option>America/New_York</option><option>America/Los_Angeles</option><option>UTC</option></datalist><small data-i18n="form.timezoneHint">可输入其他地区，例如 Europe/Paris</small></label>
+            <p id="custom-schedule-note" class="form-hint full" data-i18n="form.customNote" hidden>此任务使用高级调度规则。选择其他重复频率即可改为可视化设置；不做修改时会保留原规则。</p>
             <div id="schedule-summary" class="schedule-summary full" aria-live="polite"></div>
           </div>
         </div>
 
         <div id="wol-fields" class="form-grid full nested" hidden>
-          <label class="field full"><span>目标 MAC 地址</span><input id="task-mac" placeholder="00:11:22:33:44:55" spellcheck="false"></label>
-          <label class="field"><span>广播地址</span><input id="task-broadcast" value="255.255.255.255"></label>
-          <label class="field"><span>UDP 端口</span><input id="task-port" type="number" min="1" max="65535" value="9"></label>
-          <p class="form-hint full">目标机器需先在 BIOS/UEFI 和操作系统中启用 Wake-on-LAN。</p>
+          <label class="field full"><span data-i18n="form.mac">目标 MAC 地址</span><input id="task-mac" placeholder="00:11:22:33:44:55" spellcheck="false"></label>
+          <label class="field"><span data-i18n="form.broadcast">广播地址</span><input id="task-broadcast" value="255.255.255.255"></label>
+          <label class="field"><span data-i18n="form.port">UDP 端口</span><input id="task-port" type="number" min="1" max="65535" value="9"></label>
+          <p class="form-hint full" data-i18n="form.wolHint">目标机器需先在 BIOS/UEFI 和操作系统中启用 Wake-on-LAN。</p>
         </div>
 
         <div id="script-field" class="field full">
-          <div class="script-label-row"><span>脚本内容</span><div class="script-actions"><input id="script-file" type="file" hidden><button id="upload-script-button" type="button" class="text-button">上传脚本</button><button id="check-script-button" type="button" class="text-button">检查语法</button></div></div>
+          <div class="script-label-row"><span data-i18n="form.script">脚本内容</span><div class="script-actions"><input id="script-file" type="file" hidden><button id="upload-script-button" type="button" class="text-button" data-i18n="form.upload">上传脚本</button><button id="check-script-button" type="button" class="text-button" data-i18n="form.check">检查语法</button></div></div>
           <textarea id="task-script" rows="12" maxlength="200000" spellcheck="false" placeholder="#!/usr/bin/env bash&#10;echo &quot;Hello YaYa&quot;"></textarea>
-          <div class="script-meta"><small id="script-help">支持 .sh、.bash 文件；使用 Bash 执行</small><small id="script-check-result" aria-live="polite"></small></div>
+          <div class="script-meta"><small id="script-help" data-i18n="script.shellHelp">支持 .sh、.bash 文件；使用 Bash 执行</small><small id="script-check-result" aria-live="polite"></small></div>
         </div>
-        <label class="switch-row full"><span><strong>启用定时调度</strong><small>关闭后仍可手动运行</small></span><input id="task-enabled" type="checkbox" checked role="switch"></label>
+        <label class="switch-row full"><span><strong data-i18n="form.enabled">启用定时调度</strong><small data-i18n="form.enabledHint">关闭后仍可手动运行</small></span><input id="task-enabled" type="checkbox" checked role="switch"></label>
       </div>
-      <div class="dialog-actions"><button type="button" class="button button-secondary" data-close="task-dialog">取消</button><button id="save-button" type="submit" class="button button-primary">保存任务</button></div>
+      <div class="dialog-actions"><button type="button" class="button button-secondary" data-close="task-dialog" data-i18n="form.cancel">取消</button><button id="save-button" type="submit" class="button button-primary" data-i18n="form.save">保存任务</button></div>
     </form>
   </dialog>
 
   <dialog id="run-dialog" class="dialog run-dialog">
-    <div class="dialog-header"><div><p class="eyebrow">EXECUTION LOG</p><h2 id="run-dialog-title">执行日志</h2><p id="run-dialog-meta" class="log-meta"></p></div><button class="icon-button" data-close="run-dialog" aria-label="关闭">×</button></div>
-    <pre id="run-output">暂无输出</pre>
-    <div class="dialog-actions"><button class="button button-secondary" data-close="run-dialog">关闭</button></div>
+    <div class="dialog-header"><div><p class="eyebrow">EXECUTION LOG</p><h2 id="run-dialog-title" data-i18n="run.title">执行日志</h2><p id="run-dialog-meta" class="log-meta"></p></div><button class="icon-button" data-close="run-dialog" data-i18n-aria-label="common.close" aria-label="关闭">×</button></div>
+    <pre id="run-output" data-i18n="run.noOutput">暂无输出</pre>
+    <div class="dialog-actions"><button class="button button-secondary" data-close="run-dialog" data-i18n="common.close">关闭</button></div>
   </dialog>
 
   <dialog id="token-dialog" class="dialog token-dialog">
-    <form id="token-form"><div class="dialog-header"><div><p class="eyebrow">AUTHENTICATION</p><h2>输入访问令牌</h2></div></div><p class="token-description">服务已启用访问保护，请输入部署时设置的 <code>APP_API_TOKEN</code>。</p><label class="field"><span>访问令牌</span><input id="api-token" type="password" required autocomplete="current-password"></label><div class="dialog-actions"><button class="button button-primary" type="submit">验证并进入</button></div></form>
+    <form id="token-form"><div class="dialog-header"><div><p class="eyebrow">AUTHENTICATION</p><h2 data-i18n="token.title">输入访问令牌</h2></div></div><p class="token-description" data-i18n-html="token.description">服务已启用访问保护，请输入部署时设置的 <code>APP_API_TOKEN</code>。</p><label class="field"><span data-i18n="token.label">访问令牌</span><input id="api-token" type="password" required autocomplete="current-password"></label><div class="dialog-actions"><button class="button button-primary" type="submit" data-i18n="token.submit">验证并进入</button></div></form>
   </dialog>
 
   <div id="toast" class="toast" role="status"></div>
-  <script src="/app.js?v=20261116-1"></script>
+  <script src="/i18n.js?v=20261117-1"></script>
+  <script src="/app.js?v=20261117-1"></script>
 </body>
 </html>
